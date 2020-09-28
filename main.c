@@ -5,6 +5,7 @@
 	* The purpose of this project is to gain some experience with C and GitHub
 
 * Compile with: gcc -o progg matrixFunctions.c main.c
+* run with ./progg
 */
 
 #include <stdio.h>
@@ -18,11 +19,11 @@ int main() {
 
 	char choice = ' ';
 	// we will initialize five pointer variables, allowing our program to store five matrices
-	int* m1;
-	int *m2;
-	int *m3;
-	int *m4;
-	int *m5;
+	int* m1 = malloc(sizeof(*m1));
+	int* m2 = malloc(sizeof(*m2));
+	int *m3 = malloc(sizeof(*m3));
+	int *m4 = malloc(sizeof(*m4));
+	int *m5 = malloc(sizeof(*m5));
 	printf("*m1: %d\n", *m1);
 	printf("m1: %p\n", m1);
 	printf("*m2: %d\n", *m2);
