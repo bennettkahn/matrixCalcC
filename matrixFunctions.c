@@ -15,9 +15,12 @@
 #include <stdlib.h>
 
 
-int* enterArray(int m, int n) {
-	
-	int *matrix[m][n];
+int** enterArray(int m, int n) {
+	int **matrix;
+	matrix = malloc(sizeof(int*) * n);
+	for (int j = 0; j < m; j++) 
+         matrix[j] = (int *)malloc(n * sizeof(int)); 
+
 	for (int i = 0; i < m; ++i) {
 		for (int j = 0; j < n; ++j) {
 			printf("Enter entry (row %d, col %d): ", i + 1, j + 1);

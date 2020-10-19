@@ -18,16 +18,25 @@
 int main() {
 
 	char choice = ' ';
-	// we will initialize five pointer variables, allowing our program to store five matrices
-	int* m1 = malloc(sizeof(*m1));
-	int* m2 = malloc(sizeof(*m2));
-	int *m3 = malloc(sizeof(*m3));
-	int *m4 = malloc(sizeof(*m4));
-	int *m5 = malloc(sizeof(*m5));
-	printf("*m1: %d\n", *m1);
+	/* we will initialize five pointer variables, allowing our program to store five matrices
+	* Note that a matrix is a two-dimensional array
+	* here we are using a single pointer to STORE a two dimensional array
+	*/
+	int **m1;
+	int **m2;
+	int **m3;
+	int **m4;
+	int **m5;
 	printf("m1: %p\n", m1);
-	printf("*m2: %d\n", *m2);
-	printf("m2: %p\n", m2);
+	printf("*m1: %d\n", *m1);
+	/*
+	printf("*m1: %d\n", **m1);
+	printf("m1: %p\n", m1);
+	
+	printf("*m2: %d\n", *m3);
+	printf("m2: %p\n", m3);
+	*/
+	
 	
 
 	while (choice != 'q') {
@@ -53,21 +62,47 @@ int main() {
 			int n;
 			printf("Enter the number of rows in your matrix:\n");
 			scanf("%d", &n);
+			// how much memory we need to allocate to each pointer
+			int len = sizeof(int *) * m + sizeof(int) * m * n;
+			//printf("*m1: %d\n", **m1);
+			printf("m1: %p\n", m1);
+
 			// pointer to store array returned by enterArray()
 			if (*m1 == 0) {
+				m1 = (int **)malloc(len);
+				printf("In first block");
 				m1 = enterArray(m, n);
+				for(int k = 0; k < m; k++) {
+       	 			for(int l = 0; l < n; l++) {
+            			printf("%3d ", m1[k][l] );
+        			}
+        			printf("\n");
+        		}
+
 			} else if (*m2 == 0) {
+				m2 = (int **)malloc(len);
+				printf("In second block");
 				m2 = enterArray(m, n);
 			} else if (*m3 == 0) {
+				printf("In third block");
 				m3 = enterArray(m, n);
 			} else if (*m4 == 0) {
 				m4 = enterArray(m, n);
 			} else if (*m5 == 0) {
 				m5 = enterArray(m, n);
 			} else {
+				printf("In else block");
 				// if somebody enters more than five arrays, all five originals are deleted
+					// i.e. we free the memory we originally allocated
 				// and we assign the entered array to m1
-				*m1, *m2, *m3, *m4, *m5 = 0;
+				free(m1);
+				free(m2);
+				free(m3);
+				free(m4);
+				free(m5);
+
+				// we have gone with the 'better' above approach of freeing all of the pointers instead of below
+					//*m1, *m2, *m3, *m4, *m5 = 0;
 				m1 = enterArray(m, n);
 			}
 			
