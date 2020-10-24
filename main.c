@@ -27,8 +27,16 @@ int main() {
 	int **m3;
 	int **m4;
 	int **m5;
+	// we will use a 5x5 as our dummy values
+	int len = sizeof(int *) * 5 + sizeof(int) * 5 * 5;
+	m1 = (int **)malloc(len);
+	m2 = (int **)malloc(len);
+	m3 = (int **)malloc(len);
+	m4 = (int **)malloc(len);
+	m5 = (int **)malloc(len);
+
 	printf("m1: %p\n", m1);
-	printf("*m1: %d\n", *m1);
+	printf("*m1: %p\n", *m1);
 	/*
 	printf("*m1: %d\n", **m1);
 	printf("m1: %p\n", m1);
@@ -38,7 +46,7 @@ int main() {
 	*/
 	
 	
-
+	int num_matrices = 0;
 	while (choice != 'q') {
 		printf("Please type the chracter corresponding to the operation you wish to perform\n");
 		printf("MENU\n\n");
@@ -52,8 +60,10 @@ int main() {
 		printf("q - QUIT\n\n");
 		// ALWAYS USE & FOR SCANF!!!!
 		scanf(" %c", &choice);
+		
 
 		if (choice == 'e') {
+			printf("num_matrices is: %d\n", num_matrices);
 			// int to store number of rows in matrix
 			int m;
 			printf("Enter the number of rows in your matrix:\n");
@@ -63,15 +73,16 @@ int main() {
 			printf("Enter the number of rows in your matrix:\n");
 			scanf("%d", &n);
 			// how much memory we need to allocate to each pointer
-			int len = sizeof(int *) * m + sizeof(int) * m * n;
-			//printf("*m1: %d\n", **m1);
-			printf("m1: %p\n", m1);
-
+			//int len = sizeof(int *) * m + sizeof(int) * m * n;
 			// pointer to store array returned by enterArray()
-			if (*m1 == 0) {
-				m1 = (int **)malloc(len);
-				printf("In first block");
+			len = sizeof(int *) * 5 + sizeof(int) * 5 * 5;
+			if (num_matrices == 0) {
+				m1 = (int **)realloc(m1, len);
+				printf("In first block\n");
 				m1 = enterArray(m, n);
+				printf("**m1: %d\n", **m1);
+
+				// just testing that m1 was assigned correctly globally
 				for(int k = 0; k < m; k++) {
        	 			for(int l = 0; l < n; l++) {
             			printf("%3d ", m1[k][l] );
@@ -79,32 +90,34 @@ int main() {
         			printf("\n");
         		}
 
-			} else if (*m2 == 0) {
-				m2 = (int **)malloc(len);
-				printf("In second block");
+        	// for some reaon *m2 == 0 causes a segmentation fault but *m1 == 0 does not
+        	// going with m2 == null
+			} else if (num_matrices == 1) {
+				m2 = (int **)realloc(m2, len);
+				printf("In second block\n");
 				m2 = enterArray(m, n);
-			} else if (*m3 == 0) {
-				printf("In third block");
+			} else if (num_matrices == 2) {
+				m3 = (int **)realloc(m3, len);
+				printf("In third block\n");
 				m3 = enterArray(m, n);
-			} else if (*m4 == 0) {
+			} else if (num_matrices == 3) {
+				m4 = (int **)realloc(m4, len);
+				printf("In fourth block\n");
 				m4 = enterArray(m, n);
-			} else if (*m5 == 0) {
+			} else if (num_matrices == 4) {
+				m5 = (int **)realloc(m5, len);
+				printf("In fifth block\n");
 				m5 = enterArray(m, n);
 			} else {
-				printf("In else block");
+				printf("In else block\n");
 				// if somebody enters more than five arrays, all five originals are deleted
-					// i.e. we free the memory we originally allocated
-				// and we assign the entered array to m1
-				free(m1);
-				free(m2);
-				free(m3);
-				free(m4);
-				free(m5);
 
 				// we have gone with the 'better' above approach of freeing all of the pointers instead of below
 					//*m1, *m2, *m3, *m4, *m5 = 0;
+				// and we assign the entered array to m1
 				m1 = enterArray(m, n);
 			}
+			num_matrices++;
 			
 		}
 	}

@@ -15,11 +15,10 @@
 #include <stdlib.h>
 
 
-int** enterArray(int m, int n) {
-	int **matrix;
-	matrix = malloc(sizeof(int*) * n);
+int **enterArray(int m, int n) {
+	int **matrix = malloc(sizeof(int*) * n);
 	for (int j = 0; j < m; j++) 
-         matrix[j] = (int *)malloc(n * sizeof(int)); 
+         matrix[j] = malloc(n * sizeof(int*)); 
 
 	for (int i = 0; i < m; ++i) {
 		for (int j = 0; j < n; ++j) {
