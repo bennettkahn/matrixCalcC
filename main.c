@@ -105,6 +105,16 @@ int main() {
 			num_matrices++;
 			
 		}
+		if (choice == 'a') {
+			int **result;
+			result = matrixAddition(m1, 3, 3, m2, 3, 3);
+			for(int k = 0; k < 3; k++) {
+        		for(int l = 0; l < 3; l++) {
+            		printf("%3d ", result[k][l] );
+        		}
+        		printf("\n");
+    		}
+		}
 	}
 	return 0;
 	

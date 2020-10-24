@@ -17,8 +17,9 @@
 
 int **enterArray(int m, int n) {
 	int **matrix = malloc(sizeof(int*) * n);
-	for (int j = 0; j < m; j++) 
+	for (int j = 0; j < m; j++) {
          matrix[j] = malloc(n * sizeof(int*)); 
+      }
 
 	for (int i = 0; i < m; ++i) {
 		for (int j = 0; j < n; ++j) {
@@ -27,20 +28,33 @@ int **enterArray(int m, int n) {
 		}
 	}
 
-	for(int k = 0; k < m; k++)
-    {
-        for(int l = 0; l < n; l++)
-        {
+	for(int k = 0; k < m; k++) {
+        for(int l = 0; l < n; l++) {
             printf("%3d ", matrix[k][l] );
         }
         printf("\n");
     }
 	return matrix;
 }
-/*
-double* matrixAddition(double *arr1, double *arr2) {
-	static 
+
+int **matrixAddition(int **a, int rows_a, int cols_a, int **b, int rows_b, int cols_b) {
+	if ((rows_a != rows_b) || (cols_a != cols_b)) {
+		printf("Matrix dimensions do not match, so the two matrices cannot be added.\n");
+		return 0;
+	}
+	int **matrix = malloc(sizeof(int*) * rows_a);
+	for (int j = 0; j < rows_a; j++) {
+         matrix[j] = malloc(cols_a * sizeof(int*));
+     }
+
+    for (int i = 0; i < rows_a; i++) {
+    	for (int j = 0; j < cols_a; j++) {
+    		matrix[i][j] = a[i][j] + b[i][j];
+    	}
+    }
+
+    return matrix;
 }
-*/
+
 
 

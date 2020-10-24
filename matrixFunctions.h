@@ -25,8 +25,9 @@ int **enterArray(int m, int n);
 * --------------------------
 *
 * arr1: 
-
-double* matrixAddition(double *arr1, double *arr2);
 */
+
+int **matrixAddition(int **a, int rows_a, int cols_a, int **b, int rows_b, int cols_b);
+
 
 #endif
