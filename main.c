@@ -37,14 +37,6 @@ int main() {
 
 	printf("m1: %p\n", m1);
 	printf("*m1: %p\n", *m1);
-	/*
-	printf("*m1: %d\n", **m1);
-	printf("m1: %p\n", m1);
-	
-	printf("*m2: %d\n", *m3);
-	printf("m2: %p\n", m3);
-	*/
-	
 	
 	int num_matrices = 0;
 	while (choice != 'q') {
@@ -82,16 +74,7 @@ int main() {
 				m1 = enterArray(m, n);
 				printf("**m1: %d\n", **m1);
 
-				// just testing that m1 was assigned correctly globally
-				for(int k = 0; k < m; k++) {
-       	 			for(int l = 0; l < n; l++) {
-            			printf("%3d ", m1[k][l] );
-        			}
-        			printf("\n");
-        		}
-
         	// for some reaon *m2 == 0 causes a segmentation fault but *m1 == 0 does not
-        	// going with m2 == null
 			} else if (num_matrices == 1) {
 				m2 = (int **)realloc(m2, len);
 				printf("In second block\n");
@@ -115,6 +98,8 @@ int main() {
 				// we have gone with the 'better' above approach of freeing all of the pointers instead of below
 					//*m1, *m2, *m3, *m4, *m5 = 0;
 				// and we assign the entered array to m1
+				num_matrices = 0;
+				m1 = (int **)realloc(m1, len);
 				m1 = enterArray(m, n);
 			}
 			num_matrices++;
