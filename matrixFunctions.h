@@ -18,7 +18,11 @@
 * first prompts user to enter number of rows and columns of matrix
 * then takes input of entries 1 by 1 starting from entry (1,1) and traversing right/down the matrix
 */
-int **enterArray(int m, int n);
+int** enterArray(int m, int n);
+
+void displayMatrix(int **matrix, int m, int n);
+
+
 
 /*
 * Function: matrixAddition()
@@ -27,7 +31,7 @@ int **enterArray(int m, int n);
 * arr1: 
 */
 
-int **matrixAddition(int **a, int rows_a, int cols_a, int **b, int rows_b, int cols_b);
+int** matrixAddition(int **a, int rows_a, int cols_a, int **b, int rows_b, int cols_b);
 
 
 #endif
