@@ -165,13 +165,26 @@ int main() {
 			
 		}
 		if (choice == 'a') {
+			printf("Please enter which two matrices you would like to add, \nseparated by a comma and a space (ex: 1, 3): ");
+			int mat1, mat2;
+			scanf("%d, %d", &mat1, &mat2);
+			// ints to store the dimensions of the two matrices we are adding
+			int r1, c1, r2, c2;
+			r1 = dimensions[(2 * mat1) - 2];
+			c1 = dimensions[(2 * mat1) - 1];
+			r2 = dimensions[(2 * mat2) - 2];
+			c2 = dimensions[(2 * mat2) - 1];
+
+			// double array to STORE the matrix that results from matrixAddition
 			int **result;
-			result = matrixAddition(m1, 3, 3, m2, 3, 3);
-			printf("Your resulting matrix is: \n");
-			displayMatrix(result, 3, 3);
+			result = matrixAddition(main[mat1 - 1], r1, c1, main[mat2 - 1], r2, c2);
+			if (result != 0) {
+				printf("Your resulting matrix is: \n");
+				displayMatrix(result, r1, c1);
+			}
 			
     		//free the memory of the temporary matrix we created to get the sum
-    		for(int i = 0; i < 3; i++) {
+    		for(int i = 0; i < r1; i++) {
         		free(result[i]);
     		}
     		free(result);
