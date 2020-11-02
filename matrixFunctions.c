@@ -67,5 +67,20 @@ int** matrixAddition(int **a, int rows_a, int cols_a, int **b, int rows_b, int c
     return matrix;
 }
 
+int** matrixScalarMult(int **a, int r, int c, int x) {
+    int **matrix = (int **)malloc(sizeof(int*) * r);
+    for (int j = 0; j < r; j++) {
+        matrix[j] = (int *)malloc(c * sizeof(int));
+    }
+
+    for (int i = 0; i < r; i++) {
+        for (int j = 0; j < c; j++) {
+           matrix[i][j] = x * a[i][j];
+        }
+    }
+
+    return matrix;
+}
+
 
 

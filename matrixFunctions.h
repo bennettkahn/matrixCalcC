@@ -34,4 +34,6 @@ void displayMatrix(int **matrix, int m, int n);
 int** matrixAddition(int **a, int rows_a, int cols_a, int **b, int rows_b, int cols_b);
 
 
+int** matrixScalarMult(int **a, int r, int c, int x);
+
 #endif

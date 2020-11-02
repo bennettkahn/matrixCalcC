@@ -64,7 +64,9 @@ int main() {
 	// an array of 10 ints to store the dimensions of the maximum five matrices we can have stored in memory
 	// we will want to have the dimensions on hand later on so that we can perform matrix operations
 	int dimensions[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-	printf("dimensions[9] is: %d\n", dimensions[9]);
+
+	// one double array to STORE the matrix that results from our computations
+	int **result;
 	while (choice != 'q') {
 		printf("Main: \n");
 		for (int a = 0; a < 5; a++) {
@@ -175,8 +177,6 @@ int main() {
 			r2 = dimensions[(2 * mat2) - 2];
 			c2 = dimensions[(2 * mat2) - 1];
 
-			// double array to STORE the matrix that results from matrixAddition
-			int **result;
 			result = matrixAddition(main[mat1 - 1], r1, c1, main[mat2 - 1], r2, c2);
 			if (result != 0) {
 				printf("Your resulting matrix is: \n");
@@ -194,6 +194,33 @@ int main() {
     			scanf(" %c", &choice1);
     			;
     		}
+		}
+
+		if (choice == 's') {
+			printf("Please enter your constant and your matrix \n(ex: 4*3 for '4 times matrix 3): ");
+			// x is the constant we are multiplying by, mat1 is the matrix
+			int x, mat1;
+			scanf("%d * %d", &x, &mat1);
+			int r1, c1;
+			r1 = dimensions[(2 * mat1) - 2];
+			c1 = dimensions[(2 * mat1) - 1];
+			result = matrixScalarMult(main[mat1 - 1], r1, c1, x);
+			displayMatrix(result, r1, c1);
+
+			// CONSIDER PUTTING BOTH THE MATRIX FREEING AND the MENU PART INTO A FUNCTION!!!
+
+			//free the memory of the temporary matrix we created to get the sum
+    		for(int i = 0; i < r1; i++) {
+        		free(result[i]);
+    		}
+    		free(result);
+    		char choice1 = ' ';
+    		printf("Press \'m\' to return to main menu\n");
+    		while (choice1 != 'm') {
+    			scanf(" %c", &choice1);
+    			;
+    		}
+
 		}
 	}
 	return 0;
