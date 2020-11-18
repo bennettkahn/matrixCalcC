@@ -177,6 +177,7 @@ int main() {
 			r2 = dimensions[(2 * mat2) - 2];
 			c2 = dimensions[(2 * mat2) - 1];
 
+			// note that we are getting the matrices by indexing main, our master '3d' array, which stores all of our matrices
 			result = matrixAddition(main[mat1 - 1], r1, c1, main[mat2 - 1], r2, c2);
 			if (result != 0) {
 				printf("Your resulting matrix is: \n");
@@ -184,16 +185,10 @@ int main() {
 			}
 			
     		//free the memory of the temporary matrix we created to get the sum
-    		for(int i = 0; i < r1; i++) {
-        		free(result[i]);
-    		}
-    		free(result);
-    		char choice1 = ' ';
-    		printf("Press \'m\' to return to main menu\n");
-    		while (choice1 != 'm') {
-    			scanf(" %c", &choice1);
-    			;
-    		}
+    		destroy2DArray(result, r1, c1);
+
+    		// display sub-menu to user
+    		displaySubMenu();
 		}
 
 		if (choice == 's') {
@@ -204,22 +199,46 @@ int main() {
 			int r1, c1;
 			r1 = dimensions[(2 * mat1) - 2];
 			c1 = dimensions[(2 * mat1) - 1];
+			// get result
 			result = matrixScalarMult(main[mat1 - 1], r1, c1, x);
+
+			// display the matrix
 			displayMatrix(result, r1, c1);
 
-			// CONSIDER PUTTING BOTH THE MATRIX FREEING AND the MENU PART INTO A FUNCTION!!!
+			//free the memory of the temporary matrix we created to get the new matrix
+    		destroy2DArray(result, r1, c1);
 
-			//free the memory of the temporary matrix we created to get the sum
-    		for(int i = 0; i < r1; i++) {
-        		free(result[i]);
-    		}
-    		free(result);
-    		char choice1 = ' ';
-    		printf("Press \'m\' to return to main menu\n");
-    		while (choice1 != 'm') {
-    			scanf(" %c", &choice1);
-    			;
-    		}
+    		// display sub-menu to user
+    		displaySubMenu();
+		}
+
+		if (choice == 'm') {
+			printf("Please enter the two matrices you would like to multiply \n(ex: 1*2 for 'matrix 1 times matrix 2: ");
+			// get the two matrices
+			int mat1, mat2;
+			scanf("%d * %d", &mat1, &mat2);
+			// ints to store the dimensions of the two matrices we are adding
+			int r1, c1, r2, c2;
+			// int** matrixMult(int **a, int rows_a, int cols_a, int **b, int rows_b, int cols_b)
+			r1 = dimensions[(2 * mat1) - 2];
+			c1 = dimensions[(2 * mat1) - 1];
+			r2 = dimensions[(2 * mat2) - 2];
+			c2 = dimensions[(2 * mat2) - 1];
+			printf("r1: %d, c1: %d", r1, c1);
+			// get result
+			result = matrixMult(main[mat1 - 1], r1, c1, main[mat2 - 1], r2, c2);
+
+			printf("WE OUT\n");
+
+			// display the matrix
+			displayMatrix(result, r1, c1);
+
+			//free the memory of the temporary matrix we created to get the new matrix
+    		destroy2DArray(result, r1, c1);
+
+    		// display sub-menu to user
+    		displaySubMenu();
+
 
 		}
 	}

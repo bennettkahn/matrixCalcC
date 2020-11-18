@@ -11,6 +11,12 @@
 #include <stdbool.h>
 
 
+
+void destroy2DArray(int **arr, int r, int c);
+
+void displaySubMenu();
+
+
 /*
 * Function: enterArray()
 * ----------------------
@@ -35,5 +41,8 @@ int** matrixAddition(int **a, int rows_a, int cols_a, int **b, int rows_b, int c
 
 
 int** matrixScalarMult(int **a, int r, int c, int x);
+
+
+int** matrixMult(int **a, int rows_a, int cols_a, int **b, int rows_b, int cols_b);
 
 #endif

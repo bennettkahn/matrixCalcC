@@ -14,6 +14,25 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+
+void destroy2DArray(int **arr, int r, int c) {
+	// free memory at each row
+	for (int i = 0; i < r; i++) {
+		free(arr[i]);
+	}
+	// free whole pointer variable
+	free(arr);
+}
+
+void displaySubMenu() {
+	char choice1 = ' ';
+    	printf("Press \'m\' to return to main menu\n");
+    	while (choice1 != 'm') {
+    		scanf(" %c", &choice1);
+    		;
+    	}
+}
+
 // FOR SOME REASON WHEN M = 3 AND N = 2, I GET A SEG FAULT!?
 int** enterArray(int m, int n) {
 	int **matrix = (int **)malloc(sizeof(int*) * n);
@@ -77,6 +96,41 @@ int** matrixScalarMult(int **a, int r, int c, int x) {
         for (int j = 0; j < c; j++) {
            matrix[i][j] = x * a[i][j];
         }
+    }
+
+    return matrix;
+}
+
+
+// WHY IS THIS FUNCTION GOING INTO AN INFINITE LOOP
+int** matrixMult(int **a, int rows_a, int cols_a, int **b, int rows_b, int cols_b) {
+    if (cols_a != rows_b) {
+        printf("These two matrices cannot be multiplied together. \n");
+        return 0;
+    }
+    // our product matrix has dimensions rows_a * cols_b
+    // we create space for a matrix of those dimensions
+    int **matrix = (int **)malloc(sizeof(int*) * rows_a);
+    for (int j = 0; j < rows_a; j++) {
+        matrix[j] = (int *)malloc(cols_b * sizeof(int));
+    }
+
+    // int to store dot product at each step
+    int dot_product;
+    // we need to loop over rows of matrix a and get the dot product of row i of a and col i of b
+    for (int i = 0; i < rows_a; i++) {
+    	printf("here 1");
+    	for (int j = 0; j < cols_b; j++) {
+    		printf("here 2");
+    		dot_product = 0;
+	        for (int k = 0; k < rows_b; k++) {
+	        	printf("here 3");
+	        	// get product of entry (i, j) of a and (j, i), add to dot product
+	        	dot_product += a[i][k] * b[k][j];
+	        }
+	        matrix[i][j] = dot_product;
+	    }
+
     }
 
     return matrix;
