@@ -119,12 +119,11 @@ int** matrixMult(int **a, int rows_a, int cols_a, int **b, int rows_b, int cols_
     int dot_product;
     // we need to loop over rows of matrix a and get the dot product of row i of a and col i of b
     for (int i = 0; i < rows_a; i++) {
-    	printf("here 1");
+
     	for (int j = 0; j < cols_b; j++) {
-    		printf("here 2");
+ 
     		dot_product = 0;
 	        for (int k = 0; k < rows_b; k++) {
-	        	printf("here 3");
 	        	// get product of entry (i, j) of a and (j, i), add to dot product
 	        	dot_product += a[i][k] * b[k][j];
 	        }

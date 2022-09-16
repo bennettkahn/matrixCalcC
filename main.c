@@ -123,32 +123,30 @@ int main() {
 			//main[num_matrices] = (int **)realloc(main[num_matrices], len);
 			if (num_matrices == 0) {
 				m1 = (int **)realloc(m1, len);
-				printf("In first block\n");
 				m1 = enterArray(m, n);
 				main[num_matrices] = m1;
         	// for some reaon *m2 == 0 causes a segmentation fault but *m1 == 0 does not
 			} else if (num_matrices == 1) {
 				m2 = (int **)realloc(m2, len);
-				printf("In second block\n");
+
 				m2 = enterArray(m, n);
 				main[num_matrices] = m2;
 			} else if (num_matrices == 2) {
 				m3 = (int **)realloc(m3, len);
-				printf("In third block\n");
+
 				m3 = enterArray(m, n);
 				main[num_matrices] = m3;
 			} else if (num_matrices == 3) {
 				m4 = (int **)realloc(m4, len);
-				printf("In fourth block\n");
+
 				m4 = enterArray(m, n);
 				main[num_matrices] = m4;
 			} else if (num_matrices == 4) {
 				m5 = (int **)realloc(m5, len);
-				printf("In fifth block\n");
+
 				m5 = enterArray(m, n);
 				main[num_matrices] = m5;
 			} else {
-				printf("In else block\n");
 				// if somebody enters more than five arrays, all five originals are deleted
 
 				// we have gone with the 'better' above approach of freeing all of the pointers instead of below
@@ -213,7 +211,7 @@ int main() {
 		}
 
 		if (choice == 'm') {
-			printf("Please enter the two matrices you would like to multiply \n(ex: 1*2 for 'matrix 1 times matrix 2: ");
+			printf("Please enter the two matrices you would like to multiply \n(e.g.: '1 * 2' for 'matrix 1 times matrix 2): ");
 			// get the two matrices
 			int mat1, mat2;
 			scanf("%d * %d", &mat1, &mat2);
@@ -224,11 +222,10 @@ int main() {
 			c1 = dimensions[(2 * mat1) - 1];
 			r2 = dimensions[(2 * mat2) - 2];
 			c2 = dimensions[(2 * mat2) - 1];
-			printf("r1: %d, c1: %d", r1, c1);
 			// get result
 			result = matrixMult(main[mat1 - 1], r1, c1, main[mat2 - 1], r2, c2);
 
-			printf("WE OUT\n");
+
 
 			// display the matrix
 			displayMatrix(result, r1, c1);
